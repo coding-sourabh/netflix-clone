@@ -1,23 +1,59 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
-import Banner from "./Banner";
-import HomeScreen from "./HomeScreen";
-import Row from "./Row";
-import requests from "./Request";
+import HomeScreen from "./screens/HomeScreen";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import LoginScreen from "./screens/LoginScreen";
+import { auth } from "./firebase";
+import { useDispatch, useSelector } from "react-redux";
+import { login, logout, selectUser } from "./features/userSlice";
+import ProfileScreen from "./screens/ProfileScreen";
 
 function App() {
+  const user = useSelector(selectUser); // selector for getting back the state user from firestore
+  const dispatch = useDispatch(); // action like login,logout will be performed with the help of dispatch
+
+  if (!user) console.log("no user");
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
+      if (userAuth) {
+        //  Logged in , We are going to push user into the firestore so that it is accessible all over our app.
+        dispatch(
+          login({
+            uid: userAuth.uid,
+            email: userAuth.email,
+          })
+        );
+      } else {
+        //Logged out
+        console.log("logged out");
+        dispatch(logout());
+      }
+    });
+
+    return unsubscribe; // Cleanup
+  }, [dispatch]);
+
   return (
     <div className="App">
-      <HomeScreen />
-      <Banner />
-      <Row title="Popular Movies" fetchUrl={requests.fetchPopular} isLargeRow />
-      <Row title="Top Rated" fetchUrl={requests.fetchTopRated} />
-      <Row title="Trending Movies" fetchUrl={requests.fetchTrending} />
-      <Row title="Romantic Movies" fetchUrl={requests.fetchPopular} isLargeRow />
-      <Row title="Horror Movies" fetchUrl={requests.fetchTopRated} />
-      <Row title="Animated Movies" fetchUrl={requests.fetchTrending} />
+      <Router>
+        {!user ? (
+          <LoginScreen />
+        ) : (
+          <Switch>
+            <Route path="/profile">
+              <ProfileScreen />
+            </Route>
+            <Route exact path="/">
+              <HomeScreen />
+            </Route>
+          </Switch>
+        )}
+      </Router>
     </div>
   );
 }
 
 export default App;
+
+// We can add "exact" before path if want exactly that route only
