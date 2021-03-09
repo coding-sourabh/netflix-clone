@@ -21,6 +21,7 @@ function ProfileScreen() {
             <h2>{user.email}</h2>
             <div className="profileScreen__plans">
             <h3>Plans</h3>
+            <h2>You Have no current plans in subscription.</h2>
               <button
                 onClick={()=>{auth.signOut()}}  // Here , if you write simple auth.signOut() , then as soon as it reaches this page logout will be called
                 className="profileScreen__signOut"

@@ -7,6 +7,7 @@ import { auth } from "./firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout, selectUser } from "./features/userSlice";
 import ProfileScreen from "./screens/ProfileScreen";
+import Footer from './Footer';
 
 function App() {
   const user = useSelector(selectUser); // selector for getting back the state user from firestore
@@ -50,6 +51,7 @@ function App() {
           </Switch>
         )}
       </Router>
+      <Footer/>
     </div>
   );
 }
