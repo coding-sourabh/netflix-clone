@@ -10,16 +10,15 @@ function HomeScreen() {
     <div className="homescreen">
       <Nav />
       <Banner />
-      <Row title="Popular Movies" fetchUrl={requests.fetchPopular} isLargeRow />
-      <Row title="Top Rated" fetchUrl={requests.fetchTopRated} />
-      <Row title="Trending Movies" fetchUrl={requests.fetchTrending} />
-      <Row
-        title="Romantic Movies"
-        fetchUrl={requests.fetchPopular}
-        isLargeRow
-      />
-      <Row title="Horror Movies" fetchUrl={requests.fetchTopRated} />
-      <Row title="Animated Movies" fetchUrl={requests.fetchTrending} />
+      <Row title='NETFLIX ORIGINALS' fetchUrl={requests.fetchNetflixOriginals} isLargeRow/>
+      <Row title='Trending Now' fetchUrl={requests.fetchTrending}/>
+      <Row title='Top Rated' fetchUrl={requests.fetchTopRated}/>
+      <Row title='Action Movies' fetchUrl={requests.fetchActionMovies}/>
+      <Row title='comedy Movies' fetchUrl={requests.fetchComedyMovies}/>
+      <Row title='Horror Movies' fetchUrl={requests.fetchHorrorMovies}/>
+      <Row title='Romantic Movies' fetchUrl={requests.fetchRomanceMovies}/>
+      <Row title='Documentaries' fetchUrl={requests.fetchDocumentaries}/>
+
     </div>
   );
 }
