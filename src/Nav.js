@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Nav.css";
 import { useHistory } from "react-router-dom";
-import { logDOM } from "@testing-library/dom";
+import logo from '../src/netflix_header_logo.png';
 
 function Nav() {
   const [show, handleShow] = useState(true);
@@ -29,7 +29,7 @@ function Nav() {
         <img
           onClick={() => history.push("/")}
           className="nav__logo"
-          src="https://lh3.googleusercontent.com/proxy/6pmYu5ricBiT8297hdKnSfi9nBp1v8l6vf2lxX4pY8t7sciYkbjWVpgACNBXLyaQTQnB7LIoB91qYV8qui3atEziaRHR8UgP1wBLw7MnmRV_UXZtO4k"
+          src = {logo}
         />
 
         <img

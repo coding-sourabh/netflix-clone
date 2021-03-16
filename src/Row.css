@@ -13,7 +13,6 @@
 .row__posters::-webkit-scrollbar {
   display: none;
 }
-firebase
 .row__poster {
   max-height: 150px;
   object-fit: contain;
